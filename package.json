@@ -1,6 +1,6 @@
 {
   "name": "rethinkdb-inspector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Inspect your RethinkDB queries as they happen. Only compatible with rethinkdbdash.",
   "repository": {
     "type": "git",
