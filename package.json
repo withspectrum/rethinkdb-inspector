@@ -1,0 +1,43 @@
+{
+  "name": "rethinkdb-inspector",
+  "version": "0.1.0",
+  "description": "Inspect your RethinkDB queries as they happen. Only compatible with rethinkdbdash.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/withspectrum/rethinkdb-inspector.git"
+  },
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "precommit": "lint-staged",
+    "prebuild": "rimraf dist",
+    "build": "babel src --out-dir dist --ignore '*.test.js'",
+    "test": "jest src",
+    "prettier": "prettier --write --single-quote --trailing-comma es5 'src/**/*.js'",
+    "flow": "flow src"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --single-quote --trailing-comma es5",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.55.0",
+    "husky": "^0.14.3",
+    "jest": "^21.1.0",
+    "lint-staged": "^4.2.2",
+    "prettier": "^1.7.0",
+    "rethinkdbdash": "2.x",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "babel-plugin-transform-react-jsx": "^6.24.1"
+  },
+  "peerDependencies": {
+    "rethinkdbdash": "2.x"
+  }
+}

@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`inspect should call the onQuery callback when a query is run 1`] = `
+"r.db(\\"test\\").table(\\"bla\\").get(\\"asdf123\\")
+"
+`;
