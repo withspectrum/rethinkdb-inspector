@@ -4,6 +4,7 @@ function RethinkDBInspectorError(message: string) {
   Error.captureStackTrace(this, RethinkDBInspectorError);
 }
 
+// $FlowIssue
 RethinkDBInspectorError.prototype = new Error();
 RethinkDBInspectorError.prototype.name = 'RethinkDBInspectorError';
 
