@@ -45,7 +45,10 @@ const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
     // Call the original .run
     return run.call(this, ...args).then(arg => {
       if (onQueryComplete) {
-        onQueryComplete(getQuery.call(this), now() - start);
+        onQueryComplete(
+          getQuery.call(this),
+          Number((now() - start).toFixed(2))
+        );
       }
       return arg;
     });
