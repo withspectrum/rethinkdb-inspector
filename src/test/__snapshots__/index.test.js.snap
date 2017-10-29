@@ -4,3 +4,8 @@ exports[`inspect should call the onQuery callback when a query is run 1`] = `
 "r.db(\\"test\\").table(\\"bla\\").get(\\"asdf123\\")
 "
 `;
+
+exports[`inspect should call the onQueryComplete callback with timing information 1`] = `
+"r.db(\\"test\\").table(\\"bla\\").get(\\"asdf123\\")
+"
+`;
