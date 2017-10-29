@@ -80,6 +80,21 @@ inspect(r, {
 
 Then open `queries.js` in whatever editor of your choosing to see the list of run queries in descending order by time.
 
+#### Filter changefeed queries (or any other query)
+
+```JS
+inspect(r, {
+  onQuery: (query) => {
+    // Filter all changefeed queries
+    if (query.indexOf('.changes') > -1) return;
+
+    // do something here with all normal queries
+  }
+});
+```
+
+This can be used to filter any queries you don't care about. Only want queries running on the "users" table? `if (query.indexOf('users') === -1) return;`
+
 #### More
 
 Got a cool pattern you used with `rethinkdb-inspector`? Submit a PR and add it to this section!
