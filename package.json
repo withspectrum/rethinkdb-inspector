@@ -1,7 +1,7 @@
 {
   "name": "rethinkdb-inspector",
   "version": "0.1.1",
-  "description": "Inspect your RethinkDB queries as they happen. Only compatible with rethinkdbdash.",
+  "description": "Inspect your RethinkDB queries and find out how fast they are",
   "repository": {
     "type": "git",
     "url": "https://github.com/withspectrum/rethinkdb-inspector.git"

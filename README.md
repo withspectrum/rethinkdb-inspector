@@ -1,6 +1,6 @@
 # `rethinkdb-inspector`
 
-Inspect RethinkDB queries as they happen.
+Inspect your RethinkDB queries and find out how fast they are.
 
 > Note: This module only works with `rethinkdbdash`, PRs to add support for the main `rethinkdb` driver welcome.
 
