@@ -57,6 +57,33 @@ This callback gets the same string of the query that `onQuery` gets, but also ge
 
 > Note: The time it takes for a query to complete is very dependent on the system you're running on. Take the generated times with a grain of salt and only compare them between each other, never between different machines or runs.
 
+### Patterns
+
+#### List all queries in descending order by time
+
+```JS
+const fs = require('fs');
+const queries = [];
+
+inspect(r, {
+  onQueryComplete: (query, time) => {
+    // Add the query to the list
+    queries.push({ query, time  });
+    // Write a file, queries.js, with the list of queries in descending order
+    fs.writeFileSync(
+      'queries.js',
+      JSON.stringify(queries.sort((a, b) => b.time - a.time), null, 2)
+    );
+  },
+});
+```
+
+Then open `queries.js` in whatever editor of your choosing to see the list of run queries in descending order by time.
+
+#### More
+
+Got a cool pattern you used with `rethinkdb-inspector`? Submit a PR and add it to this section!
+
 ## License
 
 Licensed under the MIT License, Copyright ©️ 2017 Space Program Inc. See [LICENSE.md](LICENSE.md) for more information.
