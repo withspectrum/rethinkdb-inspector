@@ -1,7 +1,7 @@
 // @flow
-const { ReqlRuntimeError } = require('rethinkdbdash/lib/error');
 const now = require('performance-now');
 const { RethinkDBInspectorError } = require('./error');
+const getQueryString = require('./get-query-string');
 
 type RethinkDBDashInstance = Object;
 
@@ -9,12 +9,6 @@ type Callbacks = {
   onQuery?: string => void,
   onQueryComplete?: (string, number) => void,
 };
-
-// Use ReqlRuntimeError constructor to get the query as a nicely formatted string
-function getQuery() {
-  const error = new ReqlRuntimeError('', this._query, { b: this._frames });
-  return error.message.replace(' in:\n', '');
-}
 
 const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
   if (!r || !r._Term)
@@ -34,7 +28,7 @@ const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
   // Monkeypatch Term.prototype.run
   r._Term.prototype.run = function inspectRun(...args) {
     if (this._query && onQuery) {
-      onQuery(getQuery.call(this));
+      onQuery(getQueryString.call(this));
     }
 
     let start;
@@ -46,7 +40,7 @@ const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
     return run.call(this, ...args).then(arg => {
       if (onQueryComplete) {
         onQueryComplete(
-          getQuery.call(this),
+          getQueryString.call(this),
           Number((now() - start).toFixed(2))
         );
       }
