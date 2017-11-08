@@ -1,6 +1,5 @@
 // @flow
 const now = require('performance-now');
-const sizeof = require('object-sizeof');
 const { RethinkDBInspectorError } = require('./error');
 const getQueryString = require('./get-query-string');
 
@@ -42,7 +41,7 @@ const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
       if (onQueryComplete) {
         onQueryComplete(getQueryString.call(this), {
           time: Number((now() - start).toFixed(2)),
-          size: sizeof(arg),
+          size: arg ? JSON.stringify(arg).length : 0,
         });
       }
       return arg;

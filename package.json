@@ -34,9 +34,7 @@
     "rethinkdbdash": "2.x",
     "rimraf": "^2.6.2"
   },
-  "dependencies": {
-    "object-sizeof": "^1.2.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "rethinkdbdash": "2.x"
   }

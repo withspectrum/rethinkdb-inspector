@@ -41,7 +41,7 @@ it('should return size information', async () => {
   expect(run).toHaveBeenCalledTimes(1);
   expect(onQueryComplete).toHaveBeenCalledTimes(1);
   expect(onQueryComplete.mock.calls[0][0]).toMatchSnapshot();
-  expect(onQueryComplete.mock.calls[0][1].size).toEqual(2);
+  expect(onQueryComplete.mock.calls[0][1].size).toEqual(3);
 });
 
 it('should return size information for objects', async () => {
@@ -62,5 +62,5 @@ it('should return size information for objects', async () => {
   expect(run).toHaveBeenCalledTimes(1);
   expect(onQueryComplete).toHaveBeenCalledTimes(1);
   expect(onQueryComplete.mock.calls[0][0]).toMatchSnapshot();
-  expect(onQueryComplete.mock.calls[0][1].size).toEqual(12);
+  expect(onQueryComplete.mock.calls[0][1].size).toEqual(13);
 });
