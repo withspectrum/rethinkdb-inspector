@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return size information 1`] = `
+"r.db(\\"test\\").table(\\"bla\\").get(\\"asdf123\\")
+"
+`;
+
+exports[`should return size information for objects 1`] = `
+"r.db(\\"test\\").table(\\"bla\\").get(\\"asdf123\\")
+"
+`;
+
+exports[`should return timing information 1`] = `
+"r.db(\\"test\\").table(\\"bla\\").get(\\"asdf123\\")
+"
+`;
