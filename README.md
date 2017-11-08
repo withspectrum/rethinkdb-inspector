@@ -41,21 +41,22 @@ inspect(r, {
 
 This callback gets called with a string that looks like the query you made. So, for example, if you were to run `r.db('main').table('users').get('max').run()` your `onQuery` callback would get passed `"r.db('main').table('users').get('max').run()"`.
 
-#### onQueryComplete: Get query performance information
+#### onQueryComplete: Get query performance and size information
 
 To listen to completed queries provide the `onQueryComplete` callback:
 
 ```JS
 inspect(r, {
-  onQueryComplete: (query, time) => {
-    console.log(query, time);
+  onQueryComplete: (query, { time, size }) => {
+    console.log(query, time, size);
   }
 })
 ```
 
-This callback gets the same string of the query that `onQuery` gets, but also gets the time it took for the query to complete. This can be very useful for performance optimizations.
+This callback gets the same string of the query that `onQuery` gets, but also gets the time it took for the query to complete and the size of the response from the database in bytes. This can be very useful for performance optimizations.
 
 > Note: The time it takes for a query to complete is very dependent on the system you're running on. Take the generated times with a grain of salt and only compare them between each other, never between different machines or runs.
+> Note: The size of the response is hackily calculated and isn't accurate per-se. Like the time, take it with a grain of salt and only compare the sizes between each other, never between machines or runs.
 
 ### Patterns
 
@@ -66,7 +67,7 @@ const fs = require('fs');
 const queries = [];
 
 inspect(r, {
-  onQueryComplete: (query, time) => {
+  onQueryComplete: (query, { time }) => {
     // Add the query to the list
     queries.push({ query, time  });
     // Write a file, queries.js, with the list of queries in descending order

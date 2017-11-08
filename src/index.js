@@ -1,5 +1,6 @@
 // @flow
 const now = require('performance-now');
+const sizeof = require('object-sizeof');
 const { RethinkDBInspectorError } = require('./error');
 const getQueryString = require('./get-query-string');
 
@@ -7,7 +8,7 @@ type RethinkDBDashInstance = Object;
 
 type Callbacks = {
   onQuery?: string => void,
-  onQueryComplete?: (string, number) => void,
+  onQueryComplete?: (string, { time: number, size: number }) => void,
 };
 
 const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
@@ -39,10 +40,10 @@ const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
     // Call the original .run
     return run.call(this, ...args).then(arg => {
       if (onQueryComplete) {
-        onQueryComplete(
-          getQueryString.call(this),
-          Number((now() - start).toFixed(2))
-        );
+        onQueryComplete(getQueryString.call(this), {
+          time: Number((now() - start).toFixed(2)),
+          size: sizeof(arg),
+        });
       }
       return arg;
     });
