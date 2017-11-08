@@ -39,9 +39,17 @@ const inspect = (r: RethinkDBDashInstance, callbacks: Callbacks) => {
     // Call the original .run
     return run.call(this, ...args).then(arg => {
       if (onQueryComplete) {
-        onQueryComplete(getQueryString.call(this), {
-          time: Number((now() - start).toFixed(2)),
-          size: arg ? JSON.stringify(arg).length : 0,
+        const time = Number((now() - start).toFixed(2));
+        const query = getQueryString.call(this);
+        let size = 0;
+
+        if (arg && (!arg.constructor || arg.constructor.name !== 'Cursor')) {
+          size = JSON.stringify(arg).length;
+        }
+
+        onQueryComplete(query, {
+          time,
+          size,
         });
       }
       return arg;
